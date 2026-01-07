@@ -27,6 +27,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm create vite@latest sanslimite -- --template react
-    - run : cd sanslimite
     - run: npm install
+    - run : cd sanslimite
     - run: npm run dev

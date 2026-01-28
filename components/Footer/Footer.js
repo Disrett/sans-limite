@@ -1,5 +1,7 @@
 // components/Footer/Footer.js
 
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="sl-footer">
@@ -24,9 +26,9 @@ export default function Footer() {
         <div className="sl-footer-column sl-footer-center">
           <h3>Contactez-nous</h3>
           <p>Une question sur nos programmes ou la marque&nbsp;?</p>
-          <a href="mailto:contact@sanslimites.fr" className="sl-footer-cta">
+          <Link href="/contact" className="sl-footer-cta">
             Écrire à l&apos;équipe
-          </a>
+          </Link>
         </div>
 
         {/* Colonne droite : Réseaux sociaux */}

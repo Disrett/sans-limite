@@ -1,133 +1,39 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
 
 :root {
+  --background: #ffffff;
+  --foreground: #171717;
   --sl-white: #ffffff;
-  --sl-blue: #0b2c5d;   /* bleu profond charte */
-  --sl-orange: #ff7700; /* orange charte */
+  --sl-blue: #0b2c5d;
+  --sl-orange: #ff7700;
   --sl-black: #000000;
 }
 
-
-/* Reset basique */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
-html,
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
 body {
-  height: 100%;
-}
-
-/* Structure page globale */
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
-}
-
-/* Structure App (Next) */
-.App {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.App-header {
-  flex: 1;
-}
-
-/* Styles hérités de Create React App */
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ========================= */
-/* Navbar (ton code actuel)  */
-/* ========================= */
-
-.NavbarItems {
-  background-color: black;
-  margin: 0;
-  padding: 0;
-  height: 150px;
-}
-
-.NavbarItems h1 {
-  color: white;
-  padding: 10px;
-  font-size: 25px;
-}
-
-.logo {
-  width: 20%;
-  float: left;
-}
-
-.navbar-ul {
-  width: 80%;
-  float: left;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.navbar-ul li {
-  display: inline;
-  list-style: none;
-  font-size: 18px;
-  padding: 10px;
-  line-height: 80px;
-}
-
-.nav-links,
-.nav-links-mobile {
-  color: white;
-  text-decoration: none;
-}
-
-li:hover {
-  background-color: white;
-}
-
-li:hover .nav-links,
-li:hover .nav-links-mobile {
-  color: black;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* ========================= */
 /* Footer Sans Limites       */
 /* ========================= */
 
-/* ========================= */
-/* Footer Sans Limites (charte finale) */
-/* ========================= */
-
 .sl-footer {
-  margin-top: auto;
   background:
     radial-gradient(80% 180% at 0% 0%, rgba(11, 44, 93, 0.5), transparent),
     radial-gradient(90% 200% at 100% 0%, rgba(255, 119, 0, 0.45), transparent),
@@ -184,15 +90,9 @@ li:hover .nav-links-mobile {
   transform: translateX(2px);
 }
 
-.sl-footer-center {
-  text-align: center;
-}
+.sl-footer-center { text-align: center; }
+.sl-footer-right  { text-align: right; }
 
-.sl-footer-right {
-  text-align: right;
-}
-
-/* Bouton “Écrire à l'équipe” */
 .sl-footer-cta {
   display: inline-block;
   margin-top: 4px;
@@ -213,7 +113,6 @@ li:hover .nav-links-mobile {
   filter: brightness(1.05);
 }
 
-/* Bloc Instagram */
 .sl-footer-social {
   display: inline-flex;
   align-items: center;
@@ -233,13 +132,11 @@ li:hover .nav-links-mobile {
   width: 32px;
   height: 32px;
   border-radius: 999px;
-  background:
-    radial-gradient(circle at 30% 30%, #fdf497 0, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+  background: radial-gradient(circle at 30% 30%, #fdf497 0, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
   display: inline-block;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
 }
 
-/* Bas du footer */
 .sl-footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.14);
   text-align: center;
@@ -248,13 +145,11 @@ li:hover .nav-links-mobile {
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* Responsive */
 @media (max-width: 900px) {
   .sl-footer-inner {
     grid-template-columns: 1fr;
     text-align: left;
   }
-
   .sl-footer-center,
   .sl-footer-right {
     text-align: left;
@@ -267,19 +162,14 @@ li:hover .nav-links-mobile {
 
 .contact-page {
   min-height: 100vh;
-
-  /* Image en fond — plein écran */
   background-image: url("/background.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-
-  /* Centrage du contenu */
   display: flex;
   justify-content: center;
   align-items: center;
-
   padding: 40px 16px;
 }
 
@@ -288,35 +178,29 @@ li:hover .nav-links-mobile {
   max-width: 960px;
 }
 
-/* Titre */
 .contact-page-inner h1 {
   font-size: clamp(2.6rem, 4vw, 3.2rem);
   margin-bottom: 24px;
   font-weight: 700;
-  color: white; /* lisibilité sur fond */
+  color: white;
   text-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
 }
 
-/* Bloc formulaire */
 .contact-form {
-  /* Fond semi-transparent + léger blur */
-  background: rgba(0, 0, 0, 0.35); /* sombre transparent */
+  background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(10px);
-
   border-radius: 22px;
   padding: 28px 32px;
   box-shadow: 0 22px 50px rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Nom + prénom sur la même ligne */
 .contact-row {
   display: flex;
   gap: 16px;
   margin-bottom: 18px;
 }
 
-/* Champs */
 .contact-field {
   display: flex;
   flex-direction: column;
@@ -334,7 +218,7 @@ li:hover .nav-links-mobile {
 
 .contact-field input,
 .contact-field textarea {
-  background: #ffffff; /* champs blancs */
+  background: #ffffff;
   color: #000000;
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 12px;
@@ -354,13 +238,11 @@ li:hover .nav-links-mobile {
   box-shadow: 0 0 0 2px rgba(255, 119, 0, 0.6);
 }
 
-/* Zone message */
 .contact-field textarea {
   resize: vertical;
   min-height: 160px;
 }
 
-/* Conditions d'utilisation */
 .contact-legal {
   margin: 4px 0 8px;
 }
@@ -387,7 +269,6 @@ li:hover .nav-links-mobile {
   text-decoration: underline;
 }
 
-/* Bouton Envoyer */
 .contact-submit {
   margin-top: 16px;
   padding: 12px 26px;
@@ -407,18 +288,8 @@ li:hover .nav-links-mobile {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* Responsive */
 @media (max-width: 720px) {
-  .contact-page {
-    padding: 24px 12px;
-  }
-
-  .contact-form {
-    padding: 20px 18px;
-  }
-
-  .contact-row {
-    flex-direction: column;
-  }
+  .contact-page { padding: 24px 12px; }
+  .contact-form { padding: 20px 18px; }
+  .contact-row { flex-direction: column; }
 }
-

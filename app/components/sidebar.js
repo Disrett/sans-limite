@@ -44,7 +44,7 @@ export default function Sidebar({ showMenu, setShowMenu }) {
           <Users size={24} />
           Groupes
         </a>
-        <a href="#" className="flex items-center gap-3 py-4 px-4 text-lg text-white/80 hover:bg-white/10 rounded-lg transition-all mb-2">
+        <a href="/evenements" className="flex items-center gap-3 py-4 px-4 text-lg text-white/80 hover:bg-white/10 rounded-lg transition-all mb-2">
           <Calendar size={24} />
           Évènements
         </a>

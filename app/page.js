@@ -207,7 +207,7 @@ export default function Home() {
       <div className="lg:ml-64 flex-1 flex flex-col w-full" onClick={() => setShowMenu(false)}>
         <Header setShowMobileMenu={setShowMobileMenu} />
 
-        <main className="flex-1 overflow-y-auto pb-8 px-4 lg:px-0">
+        <main className="flex-1 overflow-y-auto px-4 lg:px-0">
           <div className="max-w-2xl mx-auto pt-4 lg:pt-6">
             <FeaturedAthletes athletes={featuredAthletes} />
             <DailyChallenge />

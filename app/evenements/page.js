@@ -510,7 +510,7 @@ export default function EvenementsPage() {
       <div className="lg:ml-64 flex-1 flex flex-col w-full" onClick={() => setShowMenu(false)}>
         <Header setShowMobileMenu={setShowMobileMenu} />
 
-        <main className="flex-1 overflow-y-auto pb-10">
+        <main className="flex-1 overflow-y-auto">
 
           {/* Hero */}
           <div className="bg-gradient-to-r from-[#0047AB] to-[#FFA75F] px-6 py-8 lg:py-10">
@@ -591,7 +591,7 @@ export default function EvenementsPage() {
             )}
           </div>
 
-          <div className="max-w-5xl mx-auto px-4 lg:px-6 mt-8">
+          <div>
             <Footer />
           </div>
         </main>

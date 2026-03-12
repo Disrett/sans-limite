@@ -1,6 +1,7 @@
 'use client';
 
 import { Bell, Send, Plus, Menu } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Header({ setShowMobileMenu }) {
   return (
@@ -39,9 +40,9 @@ export default function Header({ setShowMobileMenu }) {
           </div>
           <span className="text-base lg:text-lg font-bold text-white hidden sm:inline">Mon Profil</span>
         </div>
-        <button className="hover:bg-white/20 p-1.5 lg:p-2 rounded-full transition-all text-white">
+        <Link href="/notifications" className="hover:bg-white/20 p-1.5 lg:p-2 rounded-full transition-all text-white">
           <Bell size={22} className="lg:w-[26px] lg:h-[26px]" />
-        </button>
+        </Link>
         <button className="hidden sm:block hover:bg-white/20 p-1.5 lg:p-2 rounded-full transition-all text-white">
           <Send size={22} className="lg:w-[26px] lg:h-[26px]" />
         </button>

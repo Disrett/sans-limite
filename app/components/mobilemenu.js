@@ -1,17 +1,30 @@
 'use client';
 
-import { X, Zap, Search, TrendingUp, Grid, Users, Calendar, Compass, Menu, Settings, FileText, Mail } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { X, Zap, Search, TrendingUp, Grid, Users, Calendar, Compass, Menu, Settings, FileText, Mail } from 'lucide-react';
 
 export default function MobileMenu({ showMobileMenu, setShowMobileMenu, showMenu, setShowMenu }) {
+  const pathname = usePathname();
+
   if (!showMobileMenu) return null;
 
+  const navItems = [
+    { href: '/', label: 'Accueil', icon: Zap, exact: true },
+    { href: '#', label: 'Rechercher', icon: Search },
+    { href: '#', label: 'Actualités', icon: TrendingUp },
+    { href: '/categories', label: 'Catégories', icon: Grid },
+    { href: '#', label: 'Groupes', icon: Users },
+    { href: '/evenements', label: 'Évènements', icon: Calendar },
+    { href: '#', label: 'Découvrir', icon: Compass },
+  ];
+
   return (
-    <div 
+    <div
       className="lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
       onClick={() => setShowMobileMenu(false)}
     >
-      <div 
+      <div
         className="w-64 bg-gradient-to-br from-[#0047AB] to-[#002d6e] h-full shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
@@ -32,7 +45,7 @@ export default function MobileMenu({ showMobileMenu, setShowMobileMenu, showMenu
                 <span className="text-[#FFA75F]">Limites</span>
               </div>
             </div>
-            <button 
+            <button
               onClick={() => setShowMobileMenu(false)}
               className="text-white hover:bg-white/10 p-2 rounded-full"
             >
@@ -40,46 +53,42 @@ export default function MobileMenu({ showMobileMenu, setShowMobileMenu, showMenu
             </button>
           </div>
         </div>
-        
+
         <nav className="flex-1 px-2 py-4">
-          <Link href="/" className="flex items-center gap-3 py-4 px-4 text-lg text-white hover:bg-white/10 rounded-lg transition-all mb-2 font-semibold">
-            <Zap size={24} />
-            Accueil
-          </Link>
-          <a href="#" className="flex items-center gap-3 py-4 px-4 text-lg text-white/80 hover:bg-white/10 rounded-lg transition-all mb-2">
-            <Search size={24} />
-            Rechercher
-          </a>
-          <a href="#" className="flex items-center gap-3 py-4 px-4 text-lg text-white/80 hover:bg-white/10 rounded-lg transition-all mb-2">
-            <TrendingUp size={24} />
-            Actualités
-          </a>
-          <a href="#" className="flex items-center gap-3 py-4 px-4 text-lg text-white/80 hover:bg-white/10 rounded-lg transition-all mb-2">
-            <Grid size={24} />
-            Catégories
-          </a>
-          <a href="#" className="flex items-center gap-3 py-4 px-4 text-lg text-white/80 hover:bg-white/10 rounded-lg transition-all mb-2">
-            <Users size={24} />
-            Groupes
-          </a>
-          <a href="/evenements" className="flex items-center gap-3 py-4 px-4 text-lg text-white/80 hover:bg-white/10 rounded-lg transition-all mb-2">
-            <Calendar size={24} />
-            Évènements
-          </a>
-          <a href="#" className="flex items-center gap-3 py-4 px-4 text-lg text-white/80 hover:bg-white/10 rounded-lg transition-all mb-2">
-            <Compass size={24} />
-            Découvrir
-          </a>
-          
+          {navItems.map(({ href, label, icon: Icon, exact }) => {
+            const isActive = href !== '#' && (exact ? pathname === href : pathname.startsWith(href));
+            const classes = `flex items-center gap-3 py-4 px-4 text-lg rounded-lg transition-all mb-2 ${
+              isActive
+                ? 'bg-white/18 text-white font-semibold shadow-md'
+                : 'text-white/80 hover:bg-white/10'
+            }`;
+
+            if (href === '#') {
+              return (
+                <a key={label} href="#" className={classes}>
+                  <Icon size={24} />
+                  {label}
+                </a>
+              );
+            }
+
+            return (
+              <Link key={label} href={href} className={classes} onClick={() => setShowMobileMenu(false)}>
+                <Icon size={24} />
+                {label}
+              </Link>
+            );
+          })}
+
           <div className="relative mt-2">
-            <button 
+            <button
               onClick={() => setShowMenu(!showMenu)}
               className="flex items-center gap-3 py-4 px-4 text-lg text-white/80 hover:bg-white/10 rounded-lg transition-all w-full"
             >
               <Menu size={24} />
               Autres
             </button>
-            
+
             {showMenu && (
               <div className="mt-2 bg-white rounded-lg shadow-xl border-2 border-[#0047AB]/20 overflow-hidden">
                 <a href="#" className="flex items-center gap-3 py-3 px-4 text-[#0047AB] hover:bg-[#0047AB]/10 transition-all">
@@ -90,10 +99,10 @@ export default function MobileMenu({ showMobileMenu, setShowMobileMenu, showMenu
                   <FileText size={20} />
                   <span>Mentions légales</span>
                 </a>
-                <a href="#" className="flex items-center gap-3 py-3 px-4 text-[#0047AB] hover:bg-[#0047AB]/10 transition-all">
+                <Link href="/contact" className="flex items-center gap-3 py-3 px-4 text-[#0047AB] hover:bg-[#0047AB]/10 transition-all" onClick={() => setShowMobileMenu(false)}>
                   <Mail size={20} />
                   <span>Contact</span>
-                </a>
+                </Link>
               </div>
             )}
           </div>

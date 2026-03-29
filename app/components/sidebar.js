@@ -1,9 +1,22 @@
 'use client';
 
-import { Zap, Search, TrendingUp, Grid, Users, Calendar, Compass, Menu, Settings, FileText, Mail } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Zap, Search, TrendingUp, Grid, Users, Calendar, Compass, Menu, Settings, FileText, Mail } from 'lucide-react';
 
 export default function Sidebar({ showMenu, setShowMenu }) {
+  const pathname = usePathname();
+
+  const navItems = [
+    { href: '/', label: 'Accueil', icon: Zap, exact: true },
+    { href: '#', label: 'Rechercher', icon: Search },
+    { href: '#', label: 'Actualités', icon: TrendingUp },
+    { href: '/categories', label: 'Catégories', icon: Grid },
+    { href: '#', label: 'Groupes', icon: Users },
+    { href: '/evenements', label: 'Évènements', icon: Calendar },
+    { href: '#', label: 'Découvrir', icon: Compass },
+  ];
+
   return (
     <div className="hidden lg:flex w-64 bg-gradient-to-br from-[#0047AB] to-[#002d6e] flex-col fixed h-full shadow-xl z-30">
       <div className="p-6">
@@ -23,46 +36,42 @@ export default function Sidebar({ showMenu, setShowMenu }) {
           </div>
         </div>
       </div>
-      
+
       <nav className="flex-1 px-2 py-4">
-        <Link href="/" className="flex items-center gap-3 py-4 px-4 text-lg text-white hover:bg-white/10 rounded-lg transition-all mb-2 font-semibold">
-          <Zap size={24} />
-          Accueil
-        </Link>
-        <a href="#" className="flex items-center gap-3 py-4 px-4 text-lg text-white/80 hover:bg-white/10 rounded-lg transition-all mb-2">
-          <Search size={24} />
-          Rechercher
-        </a>
-        <a href="#" className="flex items-center gap-3 py-4 px-4 text-lg text-white/80 hover:bg-white/10 rounded-lg transition-all mb-2">
-          <TrendingUp size={24} />
-          Actualités
-        </a>
-        <a href="#" className="flex items-center gap-3 py-4 px-4 text-lg text-white/80 hover:bg-white/10 rounded-lg transition-all mb-2">
-          <Grid size={24} />
-          Catégories
-        </a>
-        <a href="#" className="flex items-center gap-3 py-4 px-4 text-lg text-white/80 hover:bg-white/10 rounded-lg transition-all mb-2">
-          <Users size={24} />
-          Groupes
-        </a>
-        <a href="/evenements" className="flex items-center gap-3 py-4 px-4 text-lg text-white/80 hover:bg-white/10 rounded-lg transition-all mb-2">
-          <Calendar size={24} />
-          Évènements
-        </a>
-        <a href="#" className="flex items-center gap-3 py-4 px-4 text-lg text-white/80 hover:bg-white/10 rounded-lg transition-all mb-2">
-          <Compass size={24} />
-          Découvrir
-        </a>
-        
+        {navItems.map(({ href, label, icon: Icon, exact }) => {
+          const isActive = href !== '#' && (exact ? pathname === href : pathname.startsWith(href));
+          const classes = `flex items-center gap-3 py-4 px-4 text-lg rounded-lg transition-all mb-2 ${
+            isActive
+              ? 'bg-white/18 text-white font-semibold shadow-md'
+              : 'text-white/80 hover:bg-white/10'
+          }`;
+
+          if (href === '#') {
+            return (
+              <a key={label} href="#" className={classes}>
+                <Icon size={24} />
+                {label}
+              </a>
+            );
+          }
+
+          return (
+            <Link key={label} href={href} className={classes}>
+              <Icon size={24} />
+              {label}
+            </Link>
+          );
+        })}
+
         <div className="relative mt-2">
-          <button 
+          <button
             onClick={() => setShowMenu(!showMenu)}
             className="flex items-center gap-3 py-4 px-4 text-lg text-white/80 hover:bg-white/10 rounded-lg transition-all w-full"
           >
             <Menu size={24} />
             Autres
           </button>
-          
+
           {showMenu && (
             <div className="absolute bottom-full left-0 w-full mb-2 bg-white rounded-lg shadow-xl border-2 border-[#0047AB]/20 overflow-hidden">
               <a href="#" className="flex items-center gap-3 py-3 px-4 text-[#0047AB] hover:bg-[#0047AB]/10 transition-all">
@@ -73,10 +82,10 @@ export default function Sidebar({ showMenu, setShowMenu }) {
                 <FileText size={20} />
                 <span>Mentions légales</span>
               </a>
-              <a href="#" className="flex items-center gap-3 py-3 px-4 text-[#0047AB] hover:bg-[#0047AB]/10 transition-all">
+              <Link href="/contact" className="flex items-center gap-3 py-3 px-4 text-[#0047AB] hover:bg-[#0047AB]/10 transition-all">
                 <Mail size={20} />
                 <span>Contact</span>
-              </a>
+              </Link>
             </div>
           )}
         </div>

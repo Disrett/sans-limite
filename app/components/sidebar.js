@@ -1,6 +1,7 @@
 'use client';
 
 import { Zap, Search, TrendingUp, Grid, Users, Calendar, Compass, Menu, Settings, FileText, Mail } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Sidebar({ showMenu, setShowMenu }) {
   return (
@@ -24,10 +25,10 @@ export default function Sidebar({ showMenu, setShowMenu }) {
       </div>
       
       <nav className="flex-1 px-2 py-4">
-        <a href="#" className="flex items-center gap-3 py-4 px-4 text-lg text-white hover:bg-white/10 rounded-lg transition-all mb-2 font-semibold">
+        <Link href="/" className="flex items-center gap-3 py-4 px-4 text-lg text-white hover:bg-white/10 rounded-lg transition-all mb-2 font-semibold">
           <Zap size={24} />
           Accueil
-        </a>
+        </Link>
         <a href="#" className="flex items-center gap-3 py-4 px-4 text-lg text-white/80 hover:bg-white/10 rounded-lg transition-all mb-2">
           <Search size={24} />
           Rechercher

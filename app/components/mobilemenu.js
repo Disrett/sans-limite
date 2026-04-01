@@ -91,10 +91,10 @@ export default function MobileMenu({ showMobileMenu, setShowMobileMenu, showMenu
 
             {showMenu && (
               <div className="mt-2 bg-white rounded-lg shadow-xl border-2 border-[#0047AB]/20 overflow-hidden">
-                <a href="#" className="flex items-center gap-3 py-3 px-4 text-[#0047AB] hover:bg-[#0047AB]/10 transition-all">
+                <Link href="/parametres" className="flex items-center gap-3 py-3 px-4 text-[#0047AB] hover:bg-[#0047AB]/10 transition-all" onClick={() => setShowMobileMenu(false)}>
                   <Settings size={20} />
                   <span>Paramètres</span>
-                </a>
+                </Link>
                 <a href="#" className="flex items-center gap-3 py-3 px-4 text-[#0047AB] hover:bg-[#0047AB]/10 transition-all">
                   <FileText size={20} />
                   <span>Mentions légales</span>

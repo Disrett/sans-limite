@@ -36,7 +36,7 @@ export default function Header({ setShowMobileMenu }) {
 
       <div className="flex-1 hidden lg:block"></div>
       <div className="flex items-center gap-3 lg:gap-4">
-        <div className="hidden md:flex items-center gap-3 bg-white/20 backdrop-blur-sm rounded-full px-3 lg:px-4 py-2">
+        <Link href="/profil" className={`hidden md:flex items-center gap-3 backdrop-blur-sm rounded-full px-3 lg:px-4 py-2 transition-all ${pathname === '/profil' ? 'bg-white/30' : 'bg-white/20 hover:bg-white/30'}`}>
           <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm">
             <svg viewBox="0 0 100 100" className="w-8 h-8">
               <circle cx="50" cy="50" r="48" fill="none" stroke="#0047AB" strokeWidth="3"/>
@@ -47,7 +47,7 @@ export default function Header({ setShowMobileMenu }) {
             </svg>
           </div>
           <span className="text-base lg:text-lg font-bold text-white hidden sm:inline">Mon Profil</span>
-        </div>
+        </Link>
 
         <Link href="/notifications" className={iconButtonClass(pathname === '/notifications')} aria-label="Notifications">
           <Bell size={22} className="lg:w-6 lg:h-6" />

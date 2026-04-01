@@ -293,3 +293,556 @@ body {
   .contact-form { padding: 20px 18px; }
   .contact-row { flex-direction: column; }
 }
+
+/* ============================================================
+   Page Profil (style Strava)
+   ============================================================ */
+
+/* ── TOKENS ─────────────────────────────────────────────────── */
+:root {
+  --strava-orange:       #fc4c02;
+  --strava-orange-light: #ff6a2f;
+  --strava-dark:         #242428;
+  --strava-gray:         #6b6b76;
+  --strava-light:        #f4f4f5;
+  --strava-border:       #e5e5e9;
+  --strava-white:        #ffffff;
+  --strava-shadow:       0 1px 4px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.06);
+  --strava-radius:       12px;
+}
+
+/* ── BASE ───────────────────────────────────────────────────── */
+.profil-page {
+  min-height: 100vh;
+  background: var(--strava-light);
+  font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: var(--strava-dark);
+}
+
+/* ── BANNER ─────────────────────────────────────────────────── */
+.profil-banner {
+  position: relative;
+  height: 180px;
+  background: linear-gradient(135deg, #1a1a1e 0%, #2d2d35 50%, #1a1a1e 100%);
+  overflow: hidden;
+}
+
+.banner-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(252, 76, 2, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.8;
+}
+
+.banner-glow {
+  position: absolute;
+  bottom: -60px;
+  right: 60px;
+  width: 260px;
+  height: 260px;
+  background: rgba(252, 76, 2, 0.2);
+  border-radius: 50%;
+  filter: blur(50px);
+}
+
+/* ── CONTAINER ──────────────────────────────────────────────── */
+.profil-container {
+  max-width: 1010px;
+  margin: -60px auto 0;
+  padding: 0 20px 48px;
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 0.45s ease-out both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── HEADER CARD ────────────────────────────────────────────── */
+.header-card {
+  background: var(--strava-white);
+  border-radius: var(--strava-radius);
+  box-shadow: var(--strava-shadow);
+  border: 1px solid var(--strava-border);
+  padding: 28px 28px 20px;
+  margin-bottom: 14px;
+}
+
+/* ── PROFILE HEADER ─────────────────────────────────────────── */
+.profile-header-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--strava-border);
+  flex-shrink: 0;
+  background: var(--strava-light);
+}
+
+.profile-info { flex: 1; min-width: 0; }
+
+.profile-name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--strava-dark);
+  margin: 0 0 2px;
+  letter-spacing: -0.02em;
+}
+
+.profile-username {
+  font-size: 0.85rem;
+  color: var(--strava-gray);
+  margin: 0 0 8px;
+}
+
+.profile-bio {
+  font-size: 0.88rem;
+  color: var(--strava-dark);
+  margin: 0 0 6px;
+  line-height: 1.5;
+}
+
+.profile-location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: var(--strava-gray);
+  margin: 0;
+}
+
+.profile-actions { flex-shrink: 0; }
+
+.btn-edit, .btn-follow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  border: 2px solid var(--strava-border);
+  background: transparent;
+  color: var(--strava-gray);
+}
+
+.btn-edit:hover  { border-color: var(--strava-orange); color: var(--strava-orange); }
+
+.btn-follow {
+  background: var(--strava-orange);
+  border-color: var(--strava-orange);
+  color: #fff;
+}
+
+.btn-follow:hover { background: var(--strava-orange-light); border-color: var(--strava-orange-light); }
+
+/* ── STATS BAR ──────────────────────────────────────────────── */
+.stats-bar {
+  display: flex;
+  background: var(--strava-white);
+  border-radius: var(--strava-radius);
+  box-shadow: var(--strava-shadow);
+  border: 1px solid var(--strava-border);
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+
+.stat-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 10px;
+  border-right: 1px solid var(--strava-border);
+  gap: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.stat-item:last-child { border-right: none; }
+.stat-item:hover      { background: var(--strava-light); }
+
+.stat-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--strava-dark);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--strava-gray);
+}
+
+/* ── TABS ───────────────────────────────────────────────────── */
+.profil-tabs {
+  display: flex;
+  position: relative;
+  background: var(--strava-white);
+  border-radius: var(--strava-radius);
+  box-shadow: var(--strava-shadow);
+  border: 1px solid var(--strava-border);
+  margin-bottom: 20px;
+  padding: 4px;
+  gap: 2px;
+}
+
+.tab-btn {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  border: none;
+  padding: 11px 16px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--strava-gray);
+  cursor: pointer;
+  border-radius: 9px;
+  transition: color 0.2s;
+}
+
+.tab-btn.active { color: var(--strava-white); }
+
+.tab-indicator {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(33.333% - 3px);
+  height: calc(100% - 8px);
+  background: var(--strava-orange);
+  border-radius: 9px;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── LAYOUT ─────────────────────────────────────────────────── */
+.content-layout {
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+/* ── SIDEBAR ────────────────────────────────────────────────── */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sidebar-card {
+  background: var(--strava-white);
+  border-radius: var(--strava-radius);
+  box-shadow: var(--strava-shadow);
+  border: 1px solid var(--strava-border);
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--strava-gray);
+  margin: 0 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.title-icon { font-size: 0.95rem; }
+
+/* Trophées */
+.trophy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.trophy-item {
+  aspect-ratio: 1;
+  background: var(--strava-light);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.55rem;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  animation: popIn 0.35s ease-out both;
+}
+
+.trophy-item:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(252, 76, 2, 0.2);
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Objectif semaine */
+.goal-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.goal-current {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--strava-dark);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.goal-target {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--strava-gray);
+}
+
+.progress-track {
+  height: 8px;
+  background: var(--strava-light);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--strava-orange), var(--strava-orange-light));
+  border-radius: 99px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.goal-label {
+  font-size: 0.73rem;
+  color: var(--strava-gray);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Objectifs & Défis actifs */
+.obj-section { }
+.obj-list { display: flex; flex-direction: column; gap: 12px; }
+.obj-item { display: flex; flex-direction: column; gap: 4px; }
+.obj-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--strava-dark);
+  margin: 0;
+}
+
+/* ── FEED ───────────────────────────────────────────────────── */
+.feed-column { min-width: 0; }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--strava-dark);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--strava-border);
+  color: var(--strava-gray);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 7px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--strava-orange);
+  color: var(--strava-orange);
+}
+
+/* ── PUBLICATIONS GRID ──────────────────────────────────────── */
+.publications-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.publication-card {
+  background: var(--strava-white);
+  border-radius: var(--strava-radius);
+  border: 1px solid var(--strava-border);
+  box-shadow: var(--strava-shadow);
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.publication-card:hover {
+  box-shadow: 0 6px 24px rgba(252, 76, 2, 0.12);
+  transform: translateY(-2px);
+}
+
+.publication-img-wrap {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+}
+
+.publication-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+
+.publication-card:hover .publication-img { transform: scale(1.05); }
+
+.publication-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.publication-card:hover .publication-overlay { opacity: 1; }
+
+.pub-stat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.publication-meta {
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.publication-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--strava-dark);
+  margin: 0;
+}
+
+.publication-time {
+  font-size: 0.75rem;
+  color: var(--strava-gray);
+  white-space: nowrap;
+}
+
+/* ── DÉFIS ──────────────────────────────────────────────────── */
+.challenges-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.challenge-card {
+  background: var(--strava-white);
+  border-radius: var(--strava-radius);
+  border: 1px solid var(--strava-border);
+  box-shadow: var(--strava-shadow);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeUp 0.35s ease-out both;
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.challenge-card:hover {
+  box-shadow: 0 6px 24px rgba(252, 76, 2, 0.15);
+  transform: translateY(-2px);
+}
+
+.challenge-icon { font-size: 1.75rem; line-height: 1; }
+
+.challenge-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--strava-dark);
+  margin: 0;
+}
+
+.challenge-bar {
+  height: 6px;
+  background: var(--strava-light);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.challenge-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--strava-orange), var(--strava-orange-light));
+  border-radius: 99px;
+}
+
+.challenge-pct {
+  font-size: 0.73rem;
+  font-weight: 700;
+  color: var(--strava-orange);
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .profil-container { margin-top: -40px; padding: 0 16px 32px; }
+  .content-layout { grid-template-columns: 1fr; }
+  .sidebar     { order: 2; }
+  .feed-column { order: 1; }
+  .stats-bar { flex-wrap: wrap; }
+  .stat-item { flex: 1 0 33%; }
+  .challenges-grid { grid-template-columns: 1fr; }
+  .publications-grid { grid-template-columns: 1fr; }
+  .profile-header-top { flex-wrap: wrap; }
+}
+
+@media (max-width: 480px) {
+  .profil-container { padding: 0 12px 24px; }
+  .header-card      { padding: 18px 14px 14px; }
+  .tab-btn          { font-size: 0.72rem; padding: 10px 6px; }
+  .stat-item        { flex: 1 0 50%; }
+  .profil-banner    { height: 130px; }
+}

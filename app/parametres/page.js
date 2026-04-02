@@ -6,7 +6,7 @@ import MobileMenu from '../components/mobilemenu';
 import Header from '../components/header';
 import {
   User, CreditCard, Palette, Accessibility, Bell, Shield,
-  ChevronRight, Camera, Eye, EyeOff, Moon, Sun, Monitor,
+  ChevronRight, Camera, Moon, Sun, Monitor,
   Smartphone, Mail, MessageCircle, Heart, Users, Lock,
   Trash2, LogOut, Check
 } from 'lucide-react';
@@ -76,7 +76,10 @@ function SectionProfil() {
 }
 
 function SectionCompte() {
-  const [showPwd, setShowPwd] = useState(false);
+  const [showQr, setShowQr] = useState(false);
+  const [phone, setPhone] = useState('');
+  const qrSeed = Math.random().toString(36).substring(2, 10);
+
   return (
     <div className="param-section">
       <h2 className="param-section-title">Compte</h2>
@@ -91,26 +94,52 @@ function SectionCompte() {
         <button className="param-btn-secondary">Changer l'adresse e-mail</button>
       </div>
 
+      <div className="param-group" style={{ gap: '8px' }}>
+        <h3 className="param-group-title" style={{ marginBottom: '0' }}>Mot de passe</h3>
+        <button className="param-btn-secondary">Mettre à jour le mot de passe</button>
+      </div>
+
       <div className="param-group">
-        <h3 className="param-group-title">Mot de passe</h3>
-        <div className="param-field">
-          <label>Mot de passe actuel</label>
-          <div className="param-input-icon">
-            <input type={showPwd ? 'text' : 'password'} placeholder="••••••••" />
-            <button type="button" onClick={() => setShowPwd(!showPwd)}>
-              {showPwd ? <EyeOff size={18} /> : <Eye size={18} />}
-            </button>
+        <h3 className="param-group-title">Application d'authentification</h3>
+        <p className="param-section-desc" style={{ marginTop: '-8px', marginBottom: '12px' }}>
+          Scanne ce QR Code avec ton application d'authentification (Google Authenticator, Authy…) pour activer la double authentification.
+        </p>
+        <button
+          className="param-btn-secondary"
+          onClick={() => setShowQr(!showQr)}
+        >
+          {showQr ? 'Masquer le QR Code' : 'Afficher le QR Code'}
+        </button>
+        {showQr && (
+          <div style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px' }}>
+            <img
+              src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=otpauth://totp/SANSLimites:alexandre.martin@email.com?secret=${qrSeed}&issuer=SANSLimites`}
+              alt="QR Code d'authentification"
+              style={{ borderRadius: '8px', border: '1px solid #e2e8f0', padding: '8px', background: '#fff' }}
+            />
+            <p style={{ fontSize: '12px', color: '#64748b' }}>Scanne ce code avec ton application, puis entre le code généré pour confirmer.</p>
           </div>
+        )}
+      </div>
+
+      <div className="param-group">
+        <h3 className="param-group-title">Authentification de secours par SMS</h3>
+        <p className="param-section-desc" style={{ marginTop: '-8px', marginBottom: '12px' }}>
+          En cas de perte d'accès à ton application d'authentification, un code de secours sera envoyé par SMS sur ce numéro.
+        </p>
+        <div className="param-field" style={{ marginBottom: '12px' }}>
+          <label>Numéro de téléphone</label>
+          <input
+            type="tel"
+            placeholder="+33 6 00 00 00 00"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
         </div>
-        <div className="param-field">
-          <label>Nouveau mot de passe</label>
-          <input type="password" placeholder="••••••••" />
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <button className="param-btn-secondary" style={{ marginTop: '0', height: '38px', padding: '0 16px', display: 'inline-flex', alignItems: 'center', boxSizing: 'border-box' }}>Enregistrer</button>
+          <button className="param-btn-danger-outline" style={{ height: '38px', padding: '0 16px', boxSizing: 'border-box' }}><Trash2 size={16} /> Supprimer</button>
         </div>
-        <div className="param-field">
-          <label>Confirmer le nouveau mot de passe</label>
-          <input type="password" placeholder="••••••••" />
-        </div>
-        <button className="param-btn-save">Mettre à jour le mot de passe</button>
       </div>
 
       <div className="param-group param-danger-group">

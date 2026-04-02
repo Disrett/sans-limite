@@ -22,7 +22,173 @@ const SECTIONS = [
 
 /* ── Composants de sections ────────────────────────────────── */
 
+const ALL_SPORTS = [
+  // Sports collectifs
+  { emoji: '⚽', label: 'Football' },
+  { emoji: '🏀', label: 'Basketball' },
+  { emoji: '🏈', label: 'Football américain' },
+  { emoji: '⚾', label: 'Baseball' },
+  { emoji: '🥎', label: 'Softball' },
+  { emoji: '🏐', label: 'Volleyball' },
+  { emoji: '🏉', label: 'Rugby' },
+  { emoji: '🎾', label: 'Tennis' },
+  { emoji: '🏸', label: 'Badminton' },
+  { emoji: '🏓', label: 'Tennis de table' },
+  { emoji: '🥏', label: 'Ultimate frisbee' },
+  { emoji: '🏑', label: 'Hockey sur gazon' },
+  { emoji: '🏒', label: 'Hockey sur glace' },
+  { emoji: '🥍', label: 'Lacrosse' },
+  { emoji: '🏏', label: 'Cricket' },
+  { emoji: '🏑', label: 'Crosse' },
+  { emoji: '🤺', label: 'Escrime' },
+  { emoji: '🏐', label: 'Beach Volley' },
+  { emoji: '🤾', label: 'Handball' },
+  { emoji: '🥅', label: 'Futsal' },
+  { emoji: '🏒', label: 'Floorball' },
+  { emoji: '🎱', label: 'Billard' },
+  { emoji: '🏸', label: 'Squash' },
+  { emoji: '🎯', label: 'Fléchettes' },
+  // Athlétisme & course
+  { emoji: '🏃', label: 'Course à pied' },
+  { emoji: '🏇', label: 'Sprint' },
+  { emoji: '🚶', label: 'Marche athlétique' },
+  { emoji: '🏔️', label: 'Trail' },
+  { emoji: '🗺️', label: 'Course d\'orientation' },
+  { emoji: '🏋️', label: 'Lancer du poids' },
+  { emoji: '🥇', label: 'Décathlon' },
+  { emoji: '🤸', label: 'Saut en hauteur' },
+  { emoji: '🏹', label: 'Saut à la perche' },
+  { emoji: '🌀', label: 'Lancer du disque' },
+  { emoji: '🎿', label: 'Saut à ski' },
+  // Cyclisme
+  { emoji: '🚴', label: 'Cyclisme' },
+  { emoji: '🚵', label: 'VTT' },
+  { emoji: '🛣️', label: 'Cyclisme sur route' },
+  { emoji: '🏁', label: 'BMX' },
+  { emoji: '⚡', label: 'Cyclisme sur piste' },
+  // Natation & sports aquatiques
+  { emoji: '🏊', label: 'Natation' },
+  { emoji: '🤽', label: 'Water-polo' },
+  { emoji: '🤿', label: 'Plongée' },
+  { emoji: '🏄', label: 'Surf' },
+  { emoji: '🚣', label: 'Aviron' },
+  { emoji: '🛶', label: 'Canoë-kayak' },
+  { emoji: '🌊', label: 'Natation en eau libre' },
+  { emoji: '🏊', label: 'Natation synchronisée' },
+  { emoji: '⛵', label: 'Voile' },
+  { emoji: '🚤', label: 'Ski nautique' },
+  { emoji: '🪂', label: 'Kitesurf' },
+  { emoji: '🏄', label: 'Wakeboard' },
+  { emoji: '🤽', label: 'Polo aquatique' },
+  { emoji: '🌊', label: 'Bodyboard' },
+  { emoji: '🚣', label: 'Dragon boat' },
+  // Sports de combat
+  { emoji: '🥊', label: 'Boxe' },
+  { emoji: '🥋', label: 'Judo' },
+  { emoji: '🥋', label: 'Karaté' },
+  { emoji: '🥋', label: 'Taekwondo' },
+  { emoji: '🤼', label: 'Lutte' },
+  { emoji: '🥋', label: 'Jiu-jitsu brésilien' },
+  { emoji: '🥊', label: 'Muay Thaï' },
+  { emoji: '🥋', label: 'Kung-fu' },
+  { emoji: '🥋', label: 'Aïkido' },
+  { emoji: '🥋', label: 'Sambo' },
+  { emoji: '🥊', label: 'Kickboxing' },
+  { emoji: '🤼', label: 'Sumo' },
+  { emoji: '🥋', label: 'MMA' },
+  { emoji: '🥋', label: 'Capoeira' },
+  // Gymnastique & acrobatie
+  { emoji: '🤸', label: 'Gymnastique artistique' },
+  { emoji: '🎀', label: 'Gymnastique rythmique' },
+  { emoji: '🤸', label: 'Trampoline' },
+  { emoji: '🤸', label: 'Parkour' },
+  { emoji: '🎪', label: 'Acrobatie' },
+  { emoji: '🧗', label: 'Escalade' },
+  // Sports d'hiver
+  { emoji: '⛷️', label: 'Ski alpin' },
+  { emoji: '🎿', label: 'Ski de fond' },
+  { emoji: '🏂', label: 'Snowboard' },
+  { emoji: '⛸️', label: 'Patinage artistique' },
+  { emoji: '⛸️', label: 'Patinage de vitesse' },
+  { emoji: '🛷', label: 'Luge' },
+  { emoji: '🛷', label: 'Bobsleigh' },
+  { emoji: '🥌', label: 'Curling' },
+  { emoji: '🏒', label: 'Patinage sur glace' },
+  { emoji: '🎿', label: 'Biathlon' },
+  { emoji: '🏔️', label: 'Ski de randonnée' },
+  { emoji: '🏂', label: 'Freestyle ski' },
+  // Sports de force & fitness
+  { emoji: '🏋️', label: 'Musculation' },
+  { emoji: '🏋️', label: 'Haltérophilie' },
+  { emoji: '💪', label: 'CrossFit' },
+  { emoji: '🧘', label: 'Yoga' },
+  { emoji: '🧘', label: 'Pilates' },
+  { emoji: '🤸', label: 'Calisthenics' },
+  { emoji: '🏃', label: 'Fitness' },
+  { emoji: '🥊', label: 'Boxe fitness' },
+  { emoji: '💃', label: 'Zumba' },
+  // Sports de raquette
+  { emoji: '🎾', label: 'Padel' },
+  { emoji: '🏸', label: 'Racquetball' },
+  // Sports équestres
+  { emoji: '🏇', label: 'Équitation' },
+  { emoji: '🐎', label: 'Saut d\'obstacles' },
+  { emoji: '🐴', label: 'Polo' },
+  { emoji: '🏇', label: 'Course hippique' },
+  { emoji: '🐎', label: 'Dressage' },
+  // Sports mécaniques
+  { emoji: '🏎️', label: 'Formule 1' },
+  { emoji: '🏍️', label: 'Moto GP' },
+  { emoji: '🚗', label: 'Rallye' },
+  { emoji: '🛵', label: 'Motocross' },
+  { emoji: '🏎️', label: 'Karting' },
+  // Sports aériens
+  { emoji: '🪂', label: 'Parachutisme' },
+  { emoji: '🦅', label: 'Vol libre' },
+  { emoji: '🪂', label: 'Parapente' },
+  { emoji: '🛩️', label: 'Vol à voile' },
+  { emoji: '🪁', label: 'BASE jump' },
+  // Sports de précision & tir
+  { emoji: '🎯', label: 'Tir à l\'arc' },
+  { emoji: '🔫', label: 'Tir sportif' },
+  { emoji: '🎳', label: 'Bowling' },
+  { emoji: '⛳', label: 'Golf' },
+  { emoji: '🎣', label: 'Pêche sportive' },
+  // Sports de plein air & aventure
+  { emoji: '🧗', label: 'Alpinisme' },
+  { emoji: '🏕️', label: 'Randonnée' },
+  { emoji: '🪓', label: 'Survie' },
+  { emoji: '🤿', label: 'Apnée' },
+  { emoji: '🌊', label: 'Rafting' },
+  // Multi-sports
+  { emoji: '🏊🚴🏃', label: 'Triathlon' },
+  { emoji: '🗺️', label: 'Biathlon' },
+  { emoji: '🥇', label: 'Pentathlon moderne' },
+  // E-sport
+  { emoji: '🎮', label: 'E-sport' },
+  // Danse sportive
+  { emoji: '💃', label: 'Danse sportive' },
+  { emoji: '🕺', label: 'Break dance' },
+  // Autres
+  { emoji: '🏹', label: 'Tir à la corde' },
+  { emoji: '🎽', label: 'Athlétisme' },
+  { emoji: '🧩', label: 'Échecs sportifs' },
+];
+
 function SectionProfil() {
+  const [selectedSports, setSelectedSports] = useState(['Cyclisme', 'Trail']);
+  const [search, setSearch] = useState('');
+
+  const toggleSport = (label) => {
+    setSelectedSports((prev) =>
+      prev.includes(label) ? prev.filter((s) => s !== label) : [...prev, label]
+    );
+  };
+
+  const filtered = ALL_SPORTS.filter((s) =>
+    s.label.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div className="param-section">
       <h2 className="param-section-title">Profil</h2>
@@ -62,9 +228,73 @@ function SectionProfil() {
           <label>Localisation</label>
           <input type="text" defaultValue="Lyon, France" placeholder="Ville, Pays" />
         </div>
+
+        {/* ── SÉLECTION DES SPORTS ── */}
         <div className="param-field">
-          <label>Sport principal</label>
-          <input type="text" defaultValue="Cyclisme & Trail" placeholder="Ton sport" />
+          <label>Mes sports</label>
+          {selectedSports.length > 0 && (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '10px' }}>
+              {selectedSports.map((s) => {
+                const sport = ALL_SPORTS.find((sp) => sp.label === s);
+                return (
+                  <span key={s} style={{
+                    display: 'inline-flex', alignItems: 'center', gap: '4px',
+                    background: '#0047AB', color: '#fff', borderRadius: '20px',
+                    padding: '4px 10px', fontSize: '13px', fontWeight: 600,
+                  }}>
+                    {sport?.emoji} {s}
+                    <button onClick={() => toggleSport(s)} style={{
+                      background: 'none', border: 'none', color: '#fff',
+                      cursor: 'pointer', padding: '0 0 0 4px', fontSize: '14px', lineHeight: 1,
+                    }}>×</button>
+                  </span>
+                );
+              })}
+            </div>
+          )}
+          <input
+            type="text"
+            placeholder="🔍 Rechercher un sport..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            style={{ marginBottom: '10px' }}
+          />
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
+            gap: '8px',
+            maxHeight: '300px',
+            overflowY: 'auto',
+            padding: '4px 2px',
+          }}>
+            {filtered.map(({ emoji, label }) => {
+              const isSelected = selectedSports.includes(label);
+              return (
+                <button
+                  key={label}
+                  onClick={() => toggleSport(label)}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: '6px',
+                    padding: '8px 10px', borderRadius: '8px', cursor: 'pointer',
+                    border: isSelected ? '2px solid #0047AB' : '1.5px solid #dbe4f2',
+                    background: isSelected ? '#eef3ff' : '#fff',
+                    color: isSelected ? '#0047AB' : '#4a5568',
+                    fontWeight: isSelected ? 700 : 500,
+                    fontSize: '13px',
+                    transition: 'all 0.15s',
+                    textAlign: 'left',
+                  }}
+                >
+                  <span style={{ fontSize: '16px' }}>{emoji}</span>
+                  <span style={{ lineHeight: 1.2 }}>{label}</span>
+                  {isSelected && <Check size={13} style={{ marginLeft: 'auto', flexShrink: 0 }} />}
+                </button>
+              );
+            })}
+          </div>
+          {filtered.length === 0 && (
+            <p style={{ color: '#94a3b8', fontSize: '13px', marginTop: '8px' }}>Aucun sport trouvé pour "{search}".</p>
+          )}
         </div>
       </div>
 

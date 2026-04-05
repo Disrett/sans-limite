@@ -12,7 +12,7 @@ export default function Sidebar({ showMenu, setShowMenu }) {
     { href: '#', label: 'Rechercher', icon: Search },
     { href: '#', label: 'Actualités', icon: TrendingUp },
     { href: '/categories', label: 'Catégories', icon: Grid },
-    { href: '#', label: 'Groupes', icon: Users },
+    { href: '/groupe', label: 'Groupes', icon: Users },
     { href: '/evenements', label: 'Évènements', icon: Calendar },
     { href: '#', label: 'Découvrir', icon: Compass },
   ];

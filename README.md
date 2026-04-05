@@ -1,70 +1,210 @@
-# Getting Started with Create React App
+# SL SANSLimites
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Plateforme sociale dédiée aux sportifs et passionnés de dépassement de soi.
 
-## Available Scripts
+SANSLimites est une application web qui permet aux athlètes de partager leurs performances, de relever des défis quotidiens, de découvrir des athlètes inspirants et de rester connectés avec une communauté sportive motivante.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Table des matières
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [Aperçu](#aperçu)
+- [Technologies utilisées](#technologies-utilisées)
+- [Prérequis](#prérequis)
+- [Installation et lancement](#installation-et-lancement)
+- [Structure du projet](#structure-du-projet)
+- [Pages de l'application](#pages-de-lapplication)
+- [Composants](#composants)
+- [Charte graphique](#charte-graphique)
+- [Contributeurs](#contributeurs)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Aperçu
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+SANSLimites est pensé comme un réseau social sportif. L'utilisateur dispose d'un fil d'actualité avec les publications des autres membres, d'un système de défis quotidiens, d'une mise en avant des athlètes de la semaine, d'une page de notifications interactive et d'un formulaire de contact.
 
-### `npm run build`
+L'interface s'inspire des grandes plateformes sociales avec une sidebar de navigation fixe sur desktop et un menu mobile adapté.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Technologies utilisées
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| Technologie | Version | Rôle |
+|---|---|---|
+| [Next.js](https://nextjs.org/) | 16.1.1 | Framework React (App Router) |
+| [React](https://react.dev/) | 19.2.3 | Bibliothèque UI |
+| [Tailwind CSS](https://tailwindcss.com/) | v4 | Styles utilitaires |
+| [Lucide React](https://lucide.dev/) | 0.562.0 | Icônes |
+| [Google Fonts](https://fonts.google.com/) | — | Typographie (Geist, Montserrat) |
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Prérequis
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Node.js** v18 ou supérieur
+- **npm** v9 ou supérieur
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Installation et lancement
 
-## Learn More
+```bash
+# 1. Cloner le dépôt
+git clone <url-du-repo>
+cd sans-limites
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# 2. Installer les dépendances
+npm install
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# 3. Lancer le serveur de développement
+npm run dev
+```
 
-### Code Splitting
+L'application est accessible sur [http://localhost:3000](http://localhost:3000).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Autres commandes disponibles
 
-### Analyzing the Bundle Size
+```bash
+npm run build   # Compilation pour la production
+npm run start   # Lancer le serveur de production (après build)
+npm run lint    # Vérification du code avec ESLint
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+> ⚠️ **Remarque** : le fichier `next.config.mjs` ne doit pas contenir `reactCompiler: true` sans avoir installé `babel-plugin-react-compiler`. Si vous rencontrez une erreur de build liée à ce package, supprimez simplement cette ligne.
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Structure du projet
 
-### Advanced Configuration
+```
+sans-limites/
+│
+├── app/                          # Dossier principal Next.js (App Router)
+│   ├── layout.js                 # Layout racine (polices, métadonnées globales)
+│   ├── globals.css               # Styles globaux (Tailwind + CSS custom)
+│   ├── page.js                   # Page d'accueil (fil d'actualité)
+│   │
+│   ├── notifications/
+│   │   └── page.js               # Page des notifications
+│   │
+│   ├── contact/
+│   │   └── page.js               # Page de contact (formulaire)
+│   │
+│   └── components/               # Composants réutilisables
+│       ├── header.js             # Barre de navigation supérieure
+│       ├── sidebar.js            # Menu latéral (desktop)
+│       ├── mobilemenu.js         # Menu latéral (mobile)
+│       ├── featuredathletes.js   # Section "Athlètes de la semaine"
+│       ├── dailychallenge.js     # Bloc "Défi du jour"
+│       ├── postcard.js           # Carte d'une publication
+│       ├── postmodal.js          # Modal de détail d'une publication
+│       └── Footer/
+│           └── Footer.js         # Pied de page
+│
+├── public/                       # Assets statiques
+│   └── background.png            # Image de fond (page contact)
+│
+├── next.config.mjs               # Configuration Next.js
+├── postcss.config.mjs            # Configuration PostCSS (Tailwind)
+├── jsconfig.json                 # Alias de chemins (@/)
+├── eslint.config.mjs             # Configuration ESLint
+└── package.json                  # Dépendances et scripts
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## Pages de l'application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### `/` — Accueil
 
-### `npm run build` fails to minify
+Le fil d'actualité principal. Cette page affiche :
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- La section **Athlètes de la semaine** avec leurs stats et un bouton "Suivre"
+- Le **Défi du jour** avec un bouton de participation
+- La liste des **publications** des membres (like, sauvegarde, commentaires)
+- Un **modal de détail** par publication avec fil de commentaires
+- Le **Footer** en bas de page
+
+La page est entièrement interactive grâce à `useState` (React).
+
+### `/notifications` — Notifications
+
+Liste de toutes les notifications de l'utilisateur. Fonctionnalités :
+
+- Affichage par type : like ❤️, commentaire 💬, abonnement 👤, défi ⚡, badge 🏆, mention ⭐
+- Filtre **Toutes / Non lues**
+- Bouton **"Tout marquer comme lu"**
+- Actions au survol : marquer comme lu ✓, supprimer 🗑️
+- État vide si toutes les notifications sont supprimées
+- Accessible via l'icône 🔔 en haut à droite du header
+
+### `/contact` — Contact
+
+Formulaire de contact avec :
+
+- Champs Nom, Prénom, Adresse mail, Message
+- Case à cocher conditions d'utilisation
+- Fond plein écran (`background.png`) avec effet glassmorphism sur le formulaire
+
+---
+
+## Composants
+
+### `Header`
+
+Barre supérieure présente sur toutes les pages. Contient :
+- Logo SANSLimites (mobile)
+- Bouton "Mon Profil"
+- Icône 🔔 Notifications → lien vers `/notifications`
+- Icône envoi de message
+- Bouton `+` d'ajout de contenu
+
+### `Sidebar`
+
+Navigation principale sur **desktop** (fixe à gauche, largeur 256px). Liens : Accueil, Rechercher, Actualités, Catégories, Groupes, Évènements, Découvrir, Autres (avec sous-menu Paramètres / Mentions légales / Contact).
+
+### `MobileMenu`
+
+Navigation principale sur **mobile** (overlay plein écran, identique à la Sidebar).
+
+### `FeaturedAthletes`
+
+Reçoit un tableau d'athlètes en props et affiche des cartes avec avatar, badge, description et statistiques (posts / abonnés).
+
+### `DailyChallenge`
+
+Bloc statique orange présentant le défi du jour avec un bouton "Participer".
+
+### `PostCard`
+
+Carte de publication. Reçoit en props : les données du post, les callbacks `onLike`, `onSave`, `onOpenModal`.
+
+### `PostModal`
+
+Modal de détail d'un post. Affiche le contenu complet, les commentaires existants et un champ pour en ajouter un nouveau.
+
+### `Footer`
+
+Pied de page avec trois colonnes : Legal, Contactez-nous, Suivez-nous. S'affiche sur la page d'accueil après le fil de publications.
+
+---
+
+## Charte graphique
+
+| Élément | Valeur |
+|---|---|
+| Couleur principale | `#0047AB` (bleu profond) |
+| Couleur secondaire | `#FFA75F` (orange) |
+| Couleur d'accentuation | `#92DCD5` (bleu clair) |
+| Fond clair | `#DEF9F1` |
+| Fond sombre | `#252A30` |
+| Typographie | **Montserrat Bold** |
+
+Le dégradé caractéristique de la navbar et du footer passe du bleu `#0047AB` à l'orange `#FFA75F`.
+
+---
+
+## Contributeurs
+
+Ce projet a été développé en collaboration dans le cadre d'un projet de groupe.

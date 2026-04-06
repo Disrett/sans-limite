@@ -16,7 +16,7 @@ export default function MobileMenu({ showMobileMenu, setShowMobileMenu, showMenu
     { href: '/categories', label: 'Catégories', icon: Grid },
     { href: '/groupe', label: 'Groupes', icon: Users },
     { href: '/evenements', label: 'Évènements', icon: Calendar },
-    { href: '#', label: 'Découvrir', icon: Compass },
+    { href: '/decouvrir', label: 'Découvrir', icon: Compass },
   ];
 
   return (

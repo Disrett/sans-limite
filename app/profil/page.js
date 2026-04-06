@@ -1,6 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
+import Sidebar from '@/app/components/sidebar';
+import MobileMenu from '@/app/components/mobilemenu';
+import Header from '@/app/components/header';
 import ProfileHeader from '@/app/components/ProfileHeader';
 import PublicationsGrid from '@/app/components/PublicationsGrid';
 import ObjectivesAndChallenges from '@/app/components/ObjectivesAndChallenges';
@@ -8,6 +11,8 @@ import { mockUser, mockPublications } from '@/app/lib/mockData';
 
 
 export default function ProfilPage() {
+  const [showMenu, setShowMenu] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
 
   const tabs = [
@@ -34,133 +39,155 @@ export default function ProfilPage() {
   ];
 
   return (
-    <div className="profil-page">
+    <div className="flex h-screen bg-[#f3f6fb] overflow-hidden">
 
-      {/* ── BANNER ── */}
-      <div className="profil-banner">
-        <div className="banner-dots" />
-        <div className="banner-glow" />
-      </div>
+      {/* ── SIDEBAR ── */}
+      <Sidebar showMenu={showMenu} setShowMenu={setShowMenu} />
 
-      <div className="profil-container">
+      {/* ── MENU MOBILE ── */}
+      <MobileMenu
+        showMobileMenu={showMobileMenu}
+        setShowMobileMenu={setShowMobileMenu}
+        showMenu={showMenu}
+        setShowMenu={setShowMenu}
+      />
 
-        {/* ── HEADER CARD ── */}
-        <div className="header-card">
-          <ProfileHeader user={mockUser} isOwnProfile={true} />
-        </div>
+      {/* ── CONTENU PRINCIPAL ── */}
+      <div
+        className="lg:ml-64 flex-1 flex flex-col w-full"
+        onClick={() => setShowMenu(false)}
+      >
+        {/* ── HEADER ── */}
+        <Header setShowMobileMenu={setShowMobileMenu} />
 
-        {/* ── STATS BAR ── */}
-        <div className="stats-bar">
-          {stats.map((stat) => (
-            <div className="stat-item" key={stat.label}>
-              <span className="stat-value">{stat.value}</span>
-              <span className="stat-label">{stat.label}</span>
-            </div>
-          ))}
-        </div>
+        {/* ── PAGE PROFIL ── */}
+        <main className="flex-1 overflow-y-auto profil-page">
 
-        {/* ── TABS ── */}
-        <nav className="profil-tabs">
-          {tabs.map((tab) => (
-            <button
-              key={tab.key}
-              className={`tab-btn${activeTab === tab.key ? ' active' : ''}`}
-              onClick={() => setActiveTab(tab.key)}
-            >
-              {tab.label}
-            </button>
-          ))}
-          <div
-            className="tab-indicator"
-            style={{ transform: `translateX(${tabIndex * 100}%)` }}
-          />
-        </nav>
+          <div className="profil-container">
 
-        {/* ── CONTENT ── */}
-        <div className="content-layout">
-
-          {/* ── SIDEBAR ── */}
-          <aside className="sidebar">
-
-            <div className="sidebar-card">
-              <h3 className="card-title">
-                <span className="title-icon">🏅</span> Trophées récents
-              </h3>
-              <div className="trophy-grid">
-                {['🥇', '🚴', '⚡', '🔥', '🏔️', '💪'].map((t, i) => (
-                  <div
-                    className="trophy-item"
-                    key={i}
-                    style={{ animationDelay: `${i * 60}ms` }}
-                  >
-                    {t}
-                  </div>
-                ))}
-              </div>
+            {/* ── HEADER CARD ── */}
+            <div className="header-card">
+              <ProfileHeader user={mockUser} isOwnProfile={true} />
             </div>
 
-            <div className="sidebar-card">
-              <h3 className="card-title">
-                <span className="title-icon">🎯</span> Objectif semaine
-              </h3>
-              <div className="goal-meta">
-                <span className="goal-current">47 km</span>
-                <span className="goal-target"> / 80 km</span>
-              </div>
-              <div className="progress-track">
-                <div className="progress-fill" style={{ width: '58%' }} />
-              </div>
-              <p className="goal-label">58 % accompli · 3 jours restants</p>
+            {/* ── STATS BAR ── */}
+            <div className="stats-bar">
+              {stats.map((stat) => (
+                <div className="stat-item" key={stat.label}>
+                  <span className="stat-value">{stat.value}</span>
+                  <span className="stat-label">{stat.label}</span>
+                </div>
+              ))}
             </div>
 
-            <div className="sidebar-card">
-              <ObjectivesAndChallenges
-                objectives={mockUser.objectives}
-                challenges={mockUser.challenges}
+            {/* ── TABS ── */}
+            <nav className="profil-tabs">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.key}
+                  className={`tab-btn${activeTab === tab.key ? ' active' : ''}`}
+                  onClick={() => setActiveTab(tab.key)}
+                >
+                  {tab.label}
+                </button>
+              ))}
+              <div
+                className="tab-indicator"
+                style={{ transform: `translateX(${tabIndex * 100}%)` }}
               />
+            </nav>
+
+            {/* ── CONTENT ── */}
+            <div className="content-layout">
+
+              {/* ── ASIDE ── */}
+              <aside className="sidebar">
+
+                <div className="sidebar-card">
+                  <h3 className="card-title">
+                    <span className="title-icon">🏅</span> Trophées récents
+                  </h3>
+                  <div className="trophy-grid">
+                    {['🥇', '🚴', '⚡', '🔥', '🏔️', '💪'].map((t, i) => (
+                      <div
+                        className="trophy-item"
+                        key={i}
+                        style={{ animationDelay: `${i * 60}ms` }}
+                      >
+                        {t}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="sidebar-card">
+                  <h3 className="card-title">
+                    <span className="title-icon">🎯</span> Objectif semaine
+                  </h3>
+                  <div className="goal-meta">
+                    <span className="goal-current">47 km</span>
+                    <span className="goal-target"> / 80 km</span>
+                  </div>
+                  <div className="progress-track">
+                    <div className="progress-fill" style={{ width: '58%' }} />
+                  </div>
+                  <p className="goal-label">58 % accompli · 3 jours restants</p>
+                </div>
+
+                <div className="sidebar-card">
+                  <ObjectivesAndChallenges
+                    objectives={mockUser.objectives}
+                    challenges={mockUser.challenges}
+                  />
+                </div>
+
+              </aside>
+
+              {/* ── FEED ── */}
+              <main className="feed-column">
+
+                {(activeTab === 'overview' || activeTab === 'activities') && (
+                  <section>
+                    <div className="section-header">
+                      <h2 className="section-title">Activités récentes</h2>
+                      <button className="btn-secondary">Tout voir</button>
+                    </div>
+                    <PublicationsGrid publications={mockPublications} />
+                  </section>
+                )}
+
+                {activeTab === 'challenges' && (
+                  <section>
+                    <div className="section-header">
+                      <h2 className="section-title">Défis en cours</h2>
+                    </div>
+                    <div className="challenges-grid">
+                      {challenges.map((c, i) => (
+                        <div
+                          className="challenge-card"
+                          key={i}
+                          style={{ animationDelay: `${i * 80}ms` }}
+                        >
+                          <div className="challenge-icon">{c.icon}</div>
+                          <p className="challenge-name">{c.name}</p>
+                          <div className="challenge-bar">
+                            <div className="challenge-fill" style={{ width: `${c.pct}%` }} />
+                          </div>
+                          <span className="challenge-pct">{c.pct} %</span>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                )}
+
+              </main>
             </div>
 
-          </aside>
+            {/* ── SPACER ── */}
+            <div style={{ height: '60px' }} />
 
-          {/* ── FEED ── */}
-          <main className="feed-column">
-
-            {(activeTab === 'overview' || activeTab === 'activities') && (
-              <section>
-                <div className="section-header">
-                  <h2 className="section-title">Activités récentes</h2>
-                  <button className="btn-secondary">Tout voir</button>
-                </div>
-                <PublicationsGrid publications={mockPublications} />
-              </section>
-            )}
-
-            {activeTab === 'challenges' && (
-              <section>
-                <div className="section-header">
-                  <h2 className="section-title">Défis en cours</h2>
-                </div>
-                <div className="challenges-grid">
-                  {challenges.map((c, i) => (
-                    <div
-                      className="challenge-card"
-                      key={i}
-                      style={{ animationDelay: `${i * 80}ms` }}
-                    >
-                      <div className="challenge-icon">{c.icon}</div>
-                      <p className="challenge-name">{c.name}</p>
-                      <div className="challenge-bar">
-                        <div className="challenge-fill" style={{ width: `${c.pct}%` }} />
-                      </div>
-                      <span className="challenge-pct">{c.pct} %</span>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            )}
-
-          </main>
-        </div>
+          </div>
+        </main>
       </div>
     </div>
   );

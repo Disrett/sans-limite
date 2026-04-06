@@ -349,8 +349,8 @@ body {
 /* ── CONTAINER ──────────────────────────────────────────────── */
 .profil-container {
   max-width: 1010px;
-  margin: -60px auto 0;
-  padding: 0 20px 48px;
+  margin: 0 auto;
+  padding: 24px 20px 80px;
   position: relative;
   z-index: 1;
   animation: fadeUp 0.45s ease-out both;
@@ -828,7 +828,7 @@ body {
 
 /* ── RESPONSIVE ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .profil-container { margin-top: -40px; padding: 0 16px 32px; }
+  .profil-container { padding: 24px 16px 64px; }
   .content-layout { grid-template-columns: 1fr; }
   .sidebar     { order: 2; }
   .feed-column { order: 1; }
@@ -840,7 +840,7 @@ body {
 }
 
 @media (max-width: 480px) {
-  .profil-container { padding: 0 12px 24px; }
+  .profil-container { padding: 20px 12px 56px; }
   .header-card      { padding: 18px 14px 14px; }
   .tab-btn          { font-size: 0.72rem; padding: 10px 6px; }
   .stat-item        { flex: 1 0 50%; }

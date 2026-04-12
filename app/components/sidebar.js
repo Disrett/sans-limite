@@ -9,7 +9,7 @@ export default function Sidebar({ showMenu, setShowMenu }) {
 
   const navItems = [
     { href: '/', label: 'Accueil', icon: Zap, exact: true },
-    { href: '#', label: 'Rechercher', icon: Search },
+    { href: '/rechercher', label: 'Rechercher', icon: Search },
     { href: '/actualites', label: 'Actualités', icon: TrendingUp },
     { href: '/categories', label: 'Catégories', icon: Grid },
     { href: '/groupe', label: 'Groupes', icon: Users },

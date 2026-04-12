@@ -11,7 +11,7 @@ export default function MobileMenu({ showMobileMenu, setShowMobileMenu, showMenu
 
   const navItems = [
     { href: '/', label: 'Accueil', icon: Zap, exact: true },
-    { href: '#', label: 'Rechercher', icon: Search },
+    { href: '/rechercher', label: 'Rechercher', icon: Search },
     { href: '/actualites', label: 'Actualités', icon: TrendingUp },
     { href: '/categories', label: 'Catégories', icon: Grid },
     { href: '/groupe', label: 'Groupes', icon: Users },

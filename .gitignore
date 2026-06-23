@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# specific files
+DEPLOY.md
+kube-cheatsheet.md
+project.zip
+sans-limite-backend
+sans-limite-frontend/node_modules
